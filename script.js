@@ -3,6 +3,7 @@ let pause = false;
 let snakeSlice;
 let tail;
 let head;
+let mode;
 const audio = {
     eat: new Audio('sounds/eat.wav'),
     hurt: new Audio('sounds/hit.wav')
@@ -13,10 +14,15 @@ let scoreValue = 0;
 const score = document.querySelector('.score span');
 const score2 = document.querySelector(".score2");
 const select = document.querySelector('.custom-select');
+const modeSelect = document.querySelector('.mode-select');
 const title = document.querySelector("h1");
 const title2 = document.querySelector(".title2");
 const infos = document.querySelector(".flex");
 const gameArea = document.querySelector('#game');
+const graph = document.querySelector('.grid');
+const bar = document.querySelector('.progress span');
+const cells = [];
+const levels = [];
 
 const game = {
     width: 900,
@@ -164,7 +170,6 @@ const loop = () => {
         render();
     }
 }
-
 const addEventListeners = () => {
     window.addEventListener('keydown', init);
 }
