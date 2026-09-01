@@ -27,6 +27,8 @@ const levels = [];
 const game = {
     width: 900,
     height: 600,
+    columns: 53,
+    rows: 7,
 }
 
 const snake = {
@@ -45,8 +47,39 @@ const apple = {
     x: 0,
     y: 0,
     size: appleSize,
-    collision: false
+    collision: false,
+    total: 0,
 };
+
+const buildGraph = () => {
+    for (let i = 0; i < game.columns*game.rows; i++) {
+        const cell = document.createElement('div');
+        cell.setAttribute('class', 'cell');
+        cells.push(cell);
+        levels.push(0);
+    }
+}
+const setMode = () => {
+    mode = modeSelect.value;
+    if (mode === 'github') {
+        document.body.setAttribute('class', 'github');
+        game.width = game.columns;
+        game.height = game.rows;
+        snake.size = 1;
+        snak.y = Math.floor(game.rows / 2);
+        resetApple();
+        render();
+    } else {
+        document.body.setAttribute('class', '');
+        game.width = 900;
+        game.height = 600;
+        snake.size = snakeSize;
+        snake.y = game.height / 2;
+    }
+    snake.x = 0;
+
+}
+
 
 const snakeBody = () => {
     for (let i = 0; i < snake.length; i++) {
