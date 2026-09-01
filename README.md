@@ -6,16 +6,16 @@ Also, there is GitHub mode, where you can play the snake game on the GitHub cont
 
 <div style="text-align: center;">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/github/commits/mahmoudgouda419/Cloneit.svg?variant=secondary&amp;size=sm&amp;mode=dark">
-    <img alt="Commits" src="https://www.shieldcn.dev/github/commits/mahmoudgouda419/Cloneit.svg?variant=secondary&amp;size=sm&amp;mode=dark">
+    <source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/github/commits/mahmoudgouda419/super-snake.svg?variant=secondary&amp;size=sm&amp;mode=dark">
+    <img alt="Commits" src="https://www.shieldcn.dev/github/commits/mahmoudgouda419/super-snake.svg?variant=secondary&amp;size=sm&amp;mode=dark">
   </picture>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/github/stars/mahmoudgouda419/Cloneit.svg?variant=secondary&amp;size=sm&amp;mode=dark">
-    <img alt="GitHub Stars" src="https://www.shieldcn.dev/github/stars/mahmoudgouda419/Cloneit.svg?variant=secondary&amp;size=sm&amp;mode=dark">
+    <source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/github/stars/mahmoudgouda419/super-snake.svg?variant=secondary&amp;size=sm&amp;mode=dark">
+    <img alt="GitHub Stars" src="https://www.shieldcn.dev/github/stars/mahmoudgouda419/super-snake.svg?variant=secondary&amp;size=sm&amp;mode=dark">
   </picture>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/github/contributors/mahmoudgouda419/Cloneit.svg?theme=emerald&amp;size=sm&amp;mode=dark">
-    <img alt="Contributors" src="https://www.shieldcn.dev/github/contributors/mahmoudgouda419/Cloneit.svg?theme=emerald&amp;size=sm&amp;mode=dark">
+    <source media="(prefers-color-scheme: dark)" srcset="https://www.shieldcn.dev/github/contributors/mahmoudgouda419/super-snake.svg?theme=emerald&amp;size=sm&amp;mode=dark">
+    <img alt="Contributors" src="https://www.shieldcn.dev/github/contributors/mahmoudgouda419/super-snake.svg?theme=emerald&amp;size=sm&amp;mode=dark">
   </picture>
 </div>
 
