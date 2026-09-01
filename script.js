@@ -23,7 +23,6 @@ const graph = document.querySelector('.grid');
 const bar = document.querySelector('.progress span');
 const cells = [];
 const levels = [];
-
 const game = {
     width: 900,
     height: 600,
@@ -52,13 +51,35 @@ const apple = {
 };
 
 const buildGraph = () => {
-    for (let i = 0; i < game.columns*game.rows; i++) {
+    for (let i = 0; i < game.columns * game.rows; i++) {
         const cell = document.createElement('div');
         cell.setAttribute('class', 'cell');
+        graph.appendChild(cell);
         cells.push(cell);
         levels.push(0);
     }
 }
+
+const fillGraph = () => {
+    apple.total = 0;
+    for (let i = 0; i < levels.length; i++) {
+        const random = Math.random();
+        if (random < 0.45) { levels[i] = 0; }
+        else if (random < 0.70) { levels[i] = 1; }
+        else if (random < 0.85) { levels[i] = 2; }
+        else if (random < 0.95) { levels[i] = 3; }
+        else { levels[i] = 4; }
+        if (levels[i] > 0) { apple.total += 1; }
+    }
+    for (let x = 0; x < snake.length + 2; x++) {
+        const index = snake.y * game.columns + x;
+        if (levels[index] > 0) {
+            levels[index] = 0;
+            apple.total -= 1;
+        }
+    }
+}
+
 const setMode = () => {
     mode = modeSelect.value;
     if (mode === 'github') {
@@ -66,8 +87,8 @@ const setMode = () => {
         game.width = game.columns;
         game.height = game.rows;
         snake.size = 1;
-        snak.y = Math.floor(game.rows / 2);
-        resetApple();
+        snake.y = Math.floor(game.rows / 2);
+        fillGraph();
         render();
     } else {
         document.body.setAttribute('class', '');
@@ -77,15 +98,13 @@ const setMode = () => {
         snake.y = game.height / 2;
     }
     snake.x = 0;
-
 }
-
 
 const snakeBody = () => {
     for (let i = 0; i < snake.length; i++) {
-        console.log(snake.y)
-        snake.body.push({ x: snakeSize * i, y: snake.y, snakeSlice });
+        snake.body.push({ x: snake.size * i, y: snake.y, snakeSlice });
     }
+    if (mode === 'github') return;
     for (let u = 0; u < snake.length; u++) {
         snake.body[u].snakeSlice = document.createElement("div");
         snake.body[u].snakeSlice.setAttribute('class', 'snake');
@@ -103,7 +122,6 @@ const snakeDirection = (e) => {
         else pause = false;
     }
 }
-
 const moveSnake = () => {
     head = snake.body[snake.length - 1];
     snake.x = head.x;
@@ -118,17 +136,29 @@ const moveSnake = () => {
         tail.y = snake.y;
     } else {
         tail = { x: snake.x, y: snake.y, snakeSlice };
-        tail.snakeSlice = document.createElement("div");
-        tail.snakeSlice.setAttribute('class', 'snake');
-        gameArea.appendChild(tail.snakeSlice);
+        if (mode !== 'github') {
+            tail.snakeSlice = document.createElement("div");
+            tail.snakeSlice.setAttribute('class', 'snake');
+            gameArea.appendChild(tail.snakeSlice);
+        }
         snake.length += 1;
         apple.collision = false;
     }
     snake.body.push(tail);
 }
 
+
 const checkCollisions = () => {
-    if (((snake.x + snake.size) > apple.x) &&
+    if (mode === 'github') {
+        if (snake.x >= 0 && snake.x < game.columns && snake.y >= 0 && snake.y < game.rows && levels[snake.y * game.columns + snake.x] >0) {
+        audio.eat.play();
+        levels[snake.y * game.columns + snake.x] = 0;
+        ++scoreValue;
+        apple.collision = true;} else if (snake.x < 0 || (snake.x + snake.size) > game.width || snake.y < 0 || (snake.y + snake.size)>game.width || snake.y < 0 || (snake.y + snake.size) > game.height) {
+            gameOver();
+        }
+    }
+    else if (((snake.x + snake.size) > apple.x) &&
         (snake.x <= (apple.x + apple.size)) &&
         ((snake.y + snake.size) >= apple.y) &&
         (snake.y <= (apple.y + apple.size))) {
@@ -189,10 +219,24 @@ const init = () => {
 }
 
 const render = () => {
+    if (mode === 'github') {
+        for  (let i = 0; i < cells.length; i++)
+        {
+            cells[i].setAttribute('class', 'cell level' + levels[i]);
+        }
+        for (let i = 0; i < snake.body.length; i++) {
+            cells[snake.body[i].y * game.columns + snake.body[i].x].setAttribute('class', 'cell snake');
+        }
+        if (snake.body.length > 0) {
+            head = snake.body[snake.body.length -1];
+            cells[head.y * game.columns + head.x].setAttribute('class', 'cell snake head');
+        }
+        bar.style.width = (scoreValue / apple.total)*100 + '%'
+    } else {
     for (let i = 0; i < snake.length; i++) {
         snake.body[i].snakeSlice.style.top = snake.body[i].y + 'px';
         snake.body[i].snakeSlice.style.left = snake.body[i].x + 'px';
-    }
+    }}
     score.innerHTML = scoreValue;
 }
 
@@ -200,11 +244,15 @@ const loop = () => {
     if (!pause) {
         moveSnake();
         checkCollisions();
-        render();
+        if (!pause) render();
     }
 }
 const addEventListeners = () => {
     window.addEventListener('keydown', init);
+    modeSelect.addEventListener('change', setMode);
+
 }
 
+buildGraph();
+setMode();
 addEventListeners();
