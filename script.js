@@ -82,6 +82,8 @@ const fillGraph = () => {
 
 const setMode = () => {
     mode = modeSelect.value;
+    modeSelect.blur();
+
     if (mode === 'github') {
         document.body.setAttribute('class', 'github');
         game.width = game.columns;
@@ -210,6 +212,8 @@ const gameOver = () => {
 
 const init = () => {
     menuDisappear();
+    modeSelect.blur();
+    select.blur();
     if (mode !== 'github') {resetApple();}
     snakeBody();
     userSpeed = 100 - 20 * (select.value - 1);
