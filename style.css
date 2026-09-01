@@ -52,7 +52,7 @@ img.space-key {
 .column {
     flex-basis: 50%;
 }
-.snake {
+#game > .snake {
     width: 15px;
     height: 15px;
     background: #fff;
@@ -82,7 +82,8 @@ select {
     -moz-appearance: none;
 }
 
-.custom-select {
+.custom-select,
+.mode-select {
     background: url('img/arrow2.svg') no-repeat right transparent;
     color: #fff;
     font-family: Courier;
@@ -92,6 +93,76 @@ select {
     background-position-x: 85%;
     background-size: 10px
 }
-.custom-select option {
+.mode-select {
+    width: 110px;
+    background-position-x: 95%
+}
+.custom-select option,
+.mode-select option {
     background-color: #000
+}
+.grid,
+.progress {
+    display: none;
+}
+.grid {
+    grid-template-columns: repeat(53, 1fr);
+    gap: 4px;
+    width: 100%;
+}
+.cell {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    background-color: #161b22;
+}
+.level1 {
+    background-color: #0e4429;
+}
+.level2 {
+    background-color: #006d32;
+}
+.level3 {
+    background-color: #26a641;
+}
+.level4 {
+    background-color: #39d353;
+}
+.progress {
+    height: 10px;
+    margin-top: 25px;
+    border-radius: 5px;
+    background-color: #161b22;
+    overflow: hidden;
+}
+.progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background-color: #39d353;
+}
+body.github {
+    background-color: #000;
+    color: #e6edf3;
+    height: auto;
+    overflow: visible;
+
+}
+.github #game {
+    width: 92%;
+    max-width: 1150px;
+    height: auto;
+    margin: 40px auto;
+    box-shadow: none;
+}
+.github .grid {
+    display: grid;
+}
+.github .progress {
+    display: block;
+}
+.github .snake {
+    background-color: #18518a;
+}
+.github .head {
+    background-color: #042947;
 }

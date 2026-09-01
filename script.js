@@ -141,6 +141,7 @@ const moveSnake = () => {
             tail.snakeSlice.setAttribute('class', 'snake');
             gameArea.appendChild(tail.snakeSlice);
         }
+
         snake.length += 1;
         apple.collision = false;
     }
@@ -154,7 +155,8 @@ const checkCollisions = () => {
         audio.eat.play();
         levels[snake.y * game.columns + snake.x] = 0;
         ++scoreValue;
-        apple.collision = true;} else if (snake.x < 0 || (snake.x + snake.size) > game.width || snake.y < 0 || (snake.y + snake.size)>game.width || snake.y < 0 || (snake.y + snake.size) > game.height) {
+        apple.collision = true;} else if (snake.x < 0 || (snake.x + snake.size) > game.width || snake.y < 0 ||
+            (snake.y + snake.size) > game.height) {
             gameOver();
         }
     }
@@ -208,7 +210,7 @@ const gameOver = () => {
 
 const init = () => {
     menuDisappear();
-    resetApple();
+    if (mode !== 'github') {resetApple();}
     snakeBody();
     userSpeed = 100 - 20 * (select.value - 1);
     setInterval(loop, userSpeed);
