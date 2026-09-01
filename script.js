@@ -27,7 +27,7 @@ const game = {
     width: 900,
     height: 600,
     columns: 53,
-    rows: 7,
+    rows: 14,
 }
 
 const snake = {
